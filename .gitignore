@@ -1,0 +1,5 @@
+# Project exclude paths
+/out/
+.idea
+/src/com/wjp/leetcode/editor/cn/doc/*
+/src/com/wjp/leetcode/editor/cn/*.json
