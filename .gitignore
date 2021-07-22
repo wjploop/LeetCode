@@ -3,3 +3,4 @@
 .idea
 /src/com/wjp/leetcode/editor/cn/doc/*
 /src/com/wjp/leetcode/editor/cn/*.json
+/src/com/wjp/leetcode/editor/cn/*.txt
