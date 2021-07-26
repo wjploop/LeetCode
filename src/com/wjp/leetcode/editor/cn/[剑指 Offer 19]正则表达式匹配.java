@@ -81,9 +81,16 @@ class ZhengZeBiaoDaShiPiPeiLcof {
             return match(s, p, 0, 0);
         }
 
+        // s[0,i) 与 p[0,j) 是否可以匹配
+
         private boolean match(String s, String p, int i, int j) {
+            // 唯一可以成功的终点
             if(i == s.length() && j == p.length())
                 return true;
+
+            // 若是遇到 p中有 *,则，只有两种情况可以继续推进
+            // 忽略 当前的*以及前面一个字符，
+            // 或者，要求*前面的字符匹配，
             if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
 
                 return
