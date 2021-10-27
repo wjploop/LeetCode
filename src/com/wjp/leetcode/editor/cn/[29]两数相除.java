@@ -33,62 +33,128 @@
 
 package com.wjp.leetcode.editor.cn;
 
+import java.util.Arrays;
+
 class DivideTwoIntegers {
     public static void main(String[] args) {
         Solution solution = new DivideTwoIntegers().new Solution();
-//        int res = solution.divide(10, 3);
-        int res = solution.divide(2147483647, 1);
-        System.out.println(res);
+//        System.out.println(solution.isBeautiful(133));
+        System.out.println(solution.nextBeautifulNumber(100000));
+
+    }
+    class Solution {
+        int[] count = new int[10];
+        public int nextBeautifulNumber(int n) {
+            while (true) {
+                if (isBeautiful(++n)) {
+                    return n;
+                }
+            }
+        }
+
+        boolean isBeautiful(int n) {
+            Arrays.fill(count, 0);
+            while (n > 0) {
+                int k = n % 10;
+                count[k]++;
+                n = n / 10;
+            }
+
+            for (int i = 0; i < 10; i++) {
+//                System.out.println(i + "," + count[i]);
+                if (count[i] != 0) {
+                    if (count[i] != i) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
-    class Solution {
-        public int divide(int dividend, int divisor) {
-            // 除数如何逼近被除数
-            //
-
-
-            // 处理溢出的情况
-            if (dividend == Integer.MIN_VALUE && divisor == -1) {
-                return Integer.MAX_VALUE;
-            }
-            if (divisor == 1) {
-                return dividend;
-            }
-
-            int sign = (dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0) ? 1 : -1;
-            int value = div(Math.abs((long) dividend), Math.abs((long) divisor));
-
-            return sign == 1 ? value : -value;
-
-        }
-
-        private int div(long dividend, long divisor) {
-
-            if (dividend < divisor) {
-                return 0;
-            }
-
-            if (dividend == divisor) {
-                return 1;
-            }
-            long count = 1;
-            long sum = divisor;
-
-            while (sum < dividend) {
-                sum = sum << 1;
-                count = count << 1;
-            }
-
-            sum = sum >> 1;
-            count = count >> 1;
-
-            System.out.println("count = " + count + ", sum = " + sum);
-
-            long diff = dividend - sum;
-            return (int)(count + div(diff, divisor));
-        }
-    }
-//leetcode submit region end(Prohibit modification and deletion)
+//    class Solution {
+//        public int countValidWords(String sentence) {
+//            String[] words = sentence.split(" ");
+//            int res = 0;
+//            for (String word : words) {
+//                word = word.trim();
+//                if (word.isEmpty()) {
+//                    continue;
+//                }
+//                boolean hasTwoSplit = false;
+//                boolean containsSplit = false;
+//                boolean valid = true;
+//                for (int i = 0; i < word.length(); i++) {
+//                    char ch = word.charAt(i);
+//                    if (ch >= '0' && ch <= '9') {
+//                        continue;
+//                    }
+//                    if (ch == '-') {
+//                        if (containsSplit) {
+//                            hasTwoSplit = true;
+//                        }else{
+//                            containsSplit = true;
+//                        }
+//                    }
+//                    if (ch == '!' || ch == '.' || ch == ',') {
+//                        if (i != word.length() - 1) {
+//                            valid = false;
+//                        }
+//                    }
+//                }
+//                if (!valid) {
+//                    continue;
+//                }
+//                if (hasTwoSplit) {
+//                    continue;
+//                }
+//                if (!containsSplit) {
+//                    if (isWord(word, false)) {
+//                        res++;
+//                    }
+//                }else{
+//                    String[] pair = word.split("-");
+//                    int index = word.indexOf('-');
+//                    if (index == 0 || index ==word.length() - 1) {
+//                        continue;
+//                    }
+//                    if (isWord(pair[0], true) && isWord(pair[1], true)) {
+//                        res++;
+//                    }
+//                }
+//            }
+//            return res;
+//
+//        }
+//
+//        Boolean isWord(String word,boolean force) {
+//            if (word.length() == 0) {
+//                return false;
+//            }
+//
+//            for (int i = 0; i < word.length(); i++) {
+//                char ch = word.charAt(i);
+//                if (force) {
+//                    if (ch >= 'a' && ch <= 'z') {
+//                        force = false;
+//                    }
+//                }
+//                if (ch == '-') {
+//                    return false;
+//                }
+//                if (ch >= '0' && ch <= '9') {
+//                    return false;
+//                }
+//                if (ch == '!' || ch == '.' || ch == ',') {
+//                    if (i != word.length() - 1) {
+//                        return false;
+//                    }
+//                }
+//            }
+//            System.out.println("check: "+word);
+//            return !force;
+//        }
+//    }//leetcode submit region end(Prohibit modification and deletion)
 
 }
