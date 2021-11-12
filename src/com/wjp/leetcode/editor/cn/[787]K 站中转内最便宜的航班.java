@@ -85,7 +85,7 @@ class CheapestFlightsWithinKStops {
                 }
                 System.out.println("k = " + k);
                 while (prevSize--> 0) {
-                    var current = queue.poll();
+                    int[] current = queue.poll();
                     for (int[] flight : flights) {
                         if (flight[0] == current[1]) {
                             System.out.println("from "+ current[1] + " find "+ flight[1]);

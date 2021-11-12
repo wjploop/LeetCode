@@ -66,7 +66,21 @@ class JC7MId{
  */
 class Solution {
     public int maxPathSum(TreeNode root) {
-        return 0;
+        int[] max = new int[1];
+        max[0] = Integer.MIN_VALUE;
+        dfs(root, max);
+        return max[0];
+    }
+
+    private int dfs(TreeNode root, int[] max) {
+        if (root == null) {
+            return 0;
+        }
+        int left = Math.max(0, dfs(root.left, max));
+        int right = Math.max(0, dfs(root.right, max));
+        max[0] = Math.max(max[0], root.val + left + right);
+        return root.val + Math.max(left, right);
+
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
