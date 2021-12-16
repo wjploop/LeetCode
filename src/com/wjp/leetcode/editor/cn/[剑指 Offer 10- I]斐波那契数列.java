@@ -43,23 +43,13 @@ class FeiBoNaQiShuLieLcof {
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
+
+    /**
+     *
+     */
     class Solution {
         public int fib(int n) {
-            int[] cache = new int[n + 1];
-            return f(n, cache);
-        }
-
-        int f(int n, int[] cache) {
-            if (n == 1 || n == 0) {
-                return n;
-            }
-            if (cache[n] != 0) {
-                return cache[n];
-            }
-            int res = f(n - 1, cache) + f(n - 2, cache);
-            res = res % 1000000007;
-            cache[n] = res;
-            return res;
+            return 0;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
