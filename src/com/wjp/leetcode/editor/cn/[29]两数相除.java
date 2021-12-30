@@ -39,122 +39,40 @@ class DivideTwoIntegers {
     public static void main(String[] args) {
         Solution solution = new DivideTwoIntegers().new Solution();
 //        System.out.println(solution.isBeautiful(133));
-        System.out.println(solution.nextBeautifulNumber(100000));
 
     }
     class Solution {
-        int[] count = new int[10];
-        public int nextBeautifulNumber(int n) {
-            while (true) {
-                if (isBeautiful(++n)) {
-                    return n;
-                }
-            }
-        }
+        // 在 arr[]中寻找最大的连续子数组和
+        // arr 是首尾相连的
+        void findMaxSubArrayInCycleArray(int[] arr) {
+            // 首尾相连，可以复制一份arr
+            int n = arr.length;
+            int[] arr1 = new int[n * 2];
+            System.arraycopy(arr, 0, arr1, 0, n);
+            System.arraycopy(arr, n, arr1, 0, n);
+            // 限制 0 <= i <= n-1
+            // 其子数组长度限制 <=n
+            // 定义 以 i 为结尾最大的子数组为 sum[i]
+            int[] dp = new int[n * 2];
+            dp[0] = Math.max(arr[0], 0);
+            int res = dp[0];
 
-        boolean isBeautiful(int n) {
-            Arrays.fill(count, 0);
-            while (n > 0) {
-                int k = n % 10;
-                count[k]++;
-                n = n / 10;
+            for (int i = 1; i < n; i++) {
+                dp[i] = Math.max(dp[i - 1] + arr[i], arr[i]);
+                res = Math.max(res, dp[i]);
             }
 
-            for (int i = 0; i < 10; i++) {
-//                System.out.println(i + "," + count[i]);
-                if (count[i] != 0) {
-                    if (count[i] != i) {
-                        return false;
-                    }
-                }
+            // [0,i] + [j,n-1] ( i<j)
+            int[] dp1 = new int[n];
+
+            dp1[n - 1] = arr[n - 1];
+            int sum = dp[n - 1];
+            for (int i = n - 2; i >= 0; i--) {
+                sum += arr[i];
             }
-            return true;
+
+
         }
     }
-
-    //leetcode submit region begin(Prohibit modification and deletion)
-//    class Solution {
-//        public int countValidWords(String sentence) {
-//            String[] words = sentence.split(" ");
-//            int res = 0;
-//            for (String word : words) {
-//                word = word.trim();
-//                if (word.isEmpty()) {
-//                    continue;
-//                }
-//                boolean hasTwoSplit = false;
-//                boolean containsSplit = false;
-//                boolean valid = true;
-//                for (int i = 0; i < word.length(); i++) {
-//                    char ch = word.charAt(i);
-//                    if (ch >= '0' && ch <= '9') {
-//                        continue;
-//                    }
-//                    if (ch == '-') {
-//                        if (containsSplit) {
-//                            hasTwoSplit = true;
-//                        }else{
-//                            containsSplit = true;
-//                        }
-//                    }
-//                    if (ch == '!' || ch == '.' || ch == ',') {
-//                        if (i != word.length() - 1) {
-//                            valid = false;
-//                        }
-//                    }
-//                }
-//                if (!valid) {
-//                    continue;
-//                }
-//                if (hasTwoSplit) {
-//                    continue;
-//                }
-//                if (!containsSplit) {
-//                    if (isWord(word, false)) {
-//                        res++;
-//                    }
-//                }else{
-//                    String[] pair = word.split("-");
-//                    int index = word.indexOf('-');
-//                    if (index == 0 || index ==word.length() - 1) {
-//                        continue;
-//                    }
-//                    if (isWord(pair[0], true) && isWord(pair[1], true)) {
-//                        res++;
-//                    }
-//                }
-//            }
-//            return res;
-//
-//        }
-//
-//        Boolean isWord(String word,boolean force) {
-//            if (word.length() == 0) {
-//                return false;
-//            }
-//
-//            for (int i = 0; i < word.length(); i++) {
-//                char ch = word.charAt(i);
-//                if (force) {
-//                    if (ch >= 'a' && ch <= 'z') {
-//                        force = false;
-//                    }
-//                }
-//                if (ch == '-') {
-//                    return false;
-//                }
-//                if (ch >= '0' && ch <= '9') {
-//                    return false;
-//                }
-//                if (ch == '!' || ch == '.' || ch == ',') {
-//                    if (i != word.length() - 1) {
-//                        return false;
-//                    }
-//                }
-//            }
-//            System.out.println("check: "+word);
-//            return !force;
-//        }
-//    }//leetcode submit region end(Prohibit modification and deletion)
 
 }
