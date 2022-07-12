@@ -92,15 +92,22 @@ class TrappingRainWater {
                 if(stack.isEmpty()){
                     stack.push(i);
                 }else{
+                    // 即将入栈的元素，要是比栈顶的小，则直接入栈
+                    // 因为不会期间不会能存有水
                     if(height[i] <= height[stack.peek()]){
                         stack.push(i);
                     }else{
                         // 发现栈顶的元素比遇到元素要小，则要出栈
                         while(!stack.isEmpty() && height[i] > height[stack.peek()]){
                             int k = stack.pop();
+                            // 对于中间的这个坑 k, 我们要看左边有没有柱子
+                            // 注意，因为栈是单调递减的栈，故，左边要是有柱子，是一定 >= 当前中间的k柱子
                             if(!stack.isEmpty()){
                                 int j = stack.peek();
+                                // 对于两边的柱子，要找出较低的
                                 int min = Math.min(height[j], height[i]);
+                                // 注意，其高肯定是 min - height[k]，但其宽是 两边(i,j)中间的长度
+                                // 入一个高，可能不止退一个柱子
                                 res += (min - height[k]) * (i - j - 1);
                             }else{
                                 break;

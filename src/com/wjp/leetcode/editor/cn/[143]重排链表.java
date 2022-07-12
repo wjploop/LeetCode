@@ -59,7 +59,53 @@ class ReorderList{
  */
 class Solution {
     public void reorderList(ListNode head) {
+        // 找中点，mid
+        // 逆序后面一半的节点
+        // 拼接两部分
+        ListNode dumpy = new ListNode(-1);
+        dumpy.next = head;
+        ListNode slow = dumpy, fast = dumpy;
+        // 1,2,3
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode mid = slow.next;
+//        System.out.println("mid: "+ mid.val);
+        slow.next = null;
+        ListNode right = reverse(mid);
+        ListNode left = head;
+        ListNode tail = dumpy;
 
+        while (left != null && right != null) {
+            tail.next = left;
+            left = left.next;
+            tail.next.next = right;
+            right = right.next;
+            tail = tail.next.next;
+        }
+        if (left != null) {
+            tail.next = left;
+        }
+
+    }
+
+    private ListNode reverse(ListNode head) {
+        ListNode dumpy = new ListNode(-1);
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = dumpy.next;
+            dumpy.next = head;
+            head = next;
+        }
+        return dumpy.next;
+    }
+
+    private void print(ListNode head) {
+        while (head != null) {
+            System.out.print(head.val + ", ");
+        }
+        System.out.println("");
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
