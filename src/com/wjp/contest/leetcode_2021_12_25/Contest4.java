@@ -1,4 +1,4 @@
-package com.wjp.contest.template;
+package com.wjp.contest.leetcode_2021_12_25;
 
 class Contest4 {
     public static void main(String[] args) {

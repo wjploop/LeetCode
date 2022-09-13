@@ -1,4 +1,4 @@
-package com.wjp.contest.template;
+package com.wjp.contest.aaaa;
 
 class Contest3 {
     public static void main(String[] args) {

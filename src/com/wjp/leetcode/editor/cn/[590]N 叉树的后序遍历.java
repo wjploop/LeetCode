@@ -66,9 +66,7 @@ class Node {
 */
 
 class Solution {
-    public List<Integer> postorder(Node root) {
-        
-    }
+
 }
 //leetcode submit region end(Prohibit modification and deletion)
 
